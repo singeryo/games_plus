@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% block title %}{{ INDEX_PAGE_TITLE }}{% endblock %}
+{% block body %}
+    <div class="list-desc">
+        <p>Voici la liste de mes jeux tu peux cliquer dessus pour voir la revue</p>
+    </div>
+
+    <form method="get" action=".">
+        <input class="search-input" type="text" name="search_games" placeholder="La tu peux chercher des jeux c'est cool ..."/>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <ul class="games-list">
+        {% for game in games %}
+            <li class="game-item">
+                <a href="{% url 'games_review:game' game.slug %}">
+                    <span class="game-label">{{ game.name }}</span>
+                    <span class="game-list-img-container"><img src="{{ game.picture.url }}" class="game-list-img"/></span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if games.has_previous %}
+                <a href="?page={{ games.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ games.number }} of {{ games.paginator.num_pages }}
+            </span>
+
+            {% if games.has_next %}
+                <a href="?page={{ games.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

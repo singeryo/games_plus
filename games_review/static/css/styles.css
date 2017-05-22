@@ -1,0 +1,46 @@
+header {
+    text-align: center;
+    padding: 40px;
+}
+
+footer {
+    padding: 50px
+}
+
+.game-item {
+    width: 70%;
+    list-style-type: none;
+    text-transform: uppercase;
+    height:70px;
+    overflow: hidden;
+    margin: 7px 0;
+    background-color: lightgray;
+}
+.game-item a {
+    color: #000;
+    height: 100%;
+    display: block
+}
+.list-desc {
+    margin: 40px 0;
+}
+.games-list {
+    margin-left: -40px;
+}
+.game-list-img {
+    width: 400px;
+    position: relative;
+    bottom: 40px;
+}
+.game-list-img-container {
+    height:100%;
+    float: right;
+}
+.game-label{
+    position: relative;
+    top: 24px;
+    left: 25px;
+}
+.search-input {
+    width: 690px;
+}

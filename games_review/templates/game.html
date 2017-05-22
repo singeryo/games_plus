@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+{% block title %}{{ game }}{% endblock %}
+{% block body %}
+
+    <h2>{{ game }}</h2>
+
+    <p>La t'a des infos super sur le jeu</p>
+    <img src="{{ game.picture.url }}" alt="{{ game }}-picture">
+
+    <div class="comment-section">
+
+        <div class="existing-comments">
+            <h3>Commentaires</h3>
+            {% for comment in comments %}
+                <div class="comment">
+                    <h4>{{ comment.title }}</h4>
+                    <p>{{ comment.body }}</p>
+                    <span>Ecrit par {{ comment.author }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="new-comment">
+
+        </div>
+    </div>
+
+{% endblock %}
