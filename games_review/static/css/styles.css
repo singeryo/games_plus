@@ -1,8 +1,28 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/fonts/Raleway-Regular.ttf') format('ttf');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF,U+2C60-2C7F, U+A720-A7FF;
+}
+
+body {
+    font-family: "Raleway", sans-serif !important;
+}
+
 header {
     text-align: center;
     padding: 40px;
 }
 
+header .header-title-zone {
+    background-color: #fff;
+    border-radius: 500px;
+    box-shadow: 0 0 80px 80px #fff;
+}
+header hr {
+    border-color: gray;
+}
 footer {
     padding: 50px
 }
@@ -43,4 +63,10 @@ footer {
 }
 .search-input {
     width: 690px;
+}
+.img-container {
+    max-width: 700px;
+}
+.new-comment {
+    margin-top: 30px;
 }

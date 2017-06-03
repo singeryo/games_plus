@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from games_review.models import *
 from django.core.paginator import *
+from forms import CommentForm
 
 
 # Create your views here.
@@ -25,9 +26,16 @@ def index(request):
 def game(request, slug):
     game = get_object_or_404(Game, slug=slug)
 
-    if request.POST.get('new_comment'):
-
-        game.comments.add(request.POST.get('new_comment'))
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(False)
+            comment.game = game
+            # comment.author = request.current_user
+            # comment.save()
+    else:
+        form = CommentForm()
+        #game.comments.add(Comment.create(request.POST.get('new_comment')))
 
     comments = game.comments.all()
-    return render(request, 'game.html', {'game': game, 'comments': comments})
+    return render(request, 'game.html', {'game': game, 'comments': comments, 'form': form})

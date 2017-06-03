@@ -17,9 +17,9 @@ class Type(models.Model):
 
 
 class Game(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, verbose_name="Nom")
     slug = models.SlugField()
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, verbose_name="Auteur")
     release_date = models.DateTimeField(auto_now_add=True)
     picture = models.ImageField()
     types = models.ManyToManyField(Type)
@@ -37,6 +37,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, related_name="comments")
     body = models.TextField(max_length=300)
     game = models.ForeignKey(Game, related_name="comments")
+    date = models.DateField(auto_now=True, verbose_name="Date")
 
     def __str__(self):
         return self.title

@@ -5,8 +5,9 @@
     <h2>{{ game }}</h2>
 
     <p>La t'a des infos super sur le jeu</p>
-    <img src="{{ game.picture.url }}" alt="{{ game }}-picture">
-
+    <div class="img-container">
+        <img class="img-responsive" src="{{ game.picture.url }}" alt="{{ game }}-picture">
+    </div>
     <div class="comment-section">
 
         <div class="existing-comments">
@@ -19,9 +20,17 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="new-comment">
-
-        </div>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'games_review:game' game.slug %}">
+                <div class="new-comment form-group">
+                    <label>Nouveau commentaire</label>
+                    {{ form.body }}
+                </div>
+                <div class="form-group col-md-2">
+                    <button class="btn-success form-control">Poster</button>
+                </div>
+            </form>
+        {% endif %}
     </div>
 
 {% endblock %}
