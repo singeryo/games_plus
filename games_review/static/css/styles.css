@@ -24,49 +24,53 @@ header hr {
     border-color: gray;
 }
 footer {
-    padding: 50px
+    padding: 50px;
+    text-align: center;
 }
-
+.subpage-header {
+    margin:40px 0;
+}
 .game-item {
-    width: 70%;
+    min-height: 65px !important;
     list-style-type: none;
     text-transform: uppercase;
-    height:70px;
     overflow: hidden;
-    margin: 7px 0;
-    background-color: lightgray;
+    margin: 5px 15px;
+    border:2px solid darkcyan;
+    color: #000;
 }
 .game-item a {
     color: #000;
-    height: 100%;
-    display: block
 }
 .list-desc {
     margin: 40px 0;
 }
-.games-list {
-    margin-left: -40px;
-}
-.game-list-img {
-    width: 400px;
-    position: relative;
-    bottom: 40px;
-}
-.game-list-img-container {
-    height:100%;
-    float: right;
-}
 .game-label{
-    position: relative;
-    top: 24px;
-    left: 25px;
+    margin-top: 10px;
+    text-align: center;
 }
 .search-input {
     width: 690px;
 }
+.game-page-banner {
+    height:300px;
+    overflow: hidden;
+    margin:50px 0;
+}
+.game-page-banner img {
+    margin:0 auto;
+}
 .img-container {
-    max-width: 700px;
+    padding: 30px 0;
 }
 .new-comment {
     margin-top: 30px;
+}
+.footer-icon {
+    margin:0 15px;
+    font-size: 40px !important;
+    color: #000;
+}
+.footer-icon:hover {
+    color: #337ab7;
 }

@@ -3,14 +3,16 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib import admin
-from django.forms import ModelForm
 
+
+# Game types
 class Type(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField()
-    def  __str__(self):
+
+    def __str__(self):
         return self.name
+
     class Meta:
         verbose_name = 'Categorie'
         verbose_name_plural = 'Categories'
@@ -21,7 +23,8 @@ class Game(models.Model):
     slug = models.SlugField()
     author = models.ForeignKey(User, verbose_name="Auteur")
     release_date = models.DateTimeField(auto_now_add=True)
-    picture = models.ImageField()
+    picture = models.ImageField(help_text="Pour garentir une experience utilisateur optimale, n'utilisez que des "
+                                          "images .png")
     types = models.ManyToManyField(Type)
 
     def __str__(self):
@@ -45,4 +48,3 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Commentaire'
         verbose_name_plural = 'Commentaires'
-# Create your models here.

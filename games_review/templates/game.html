@@ -1,35 +1,63 @@
 {% extends "_base.html" %}
 {% block title %}{{ game }}{% endblock %}
+{% block page_title %}{{ game }}{% endblock %}
 {% block body %}
-
-    <h2>{{ game }}</h2>
-
-    <p>La t'a des infos super sur le jeu</p>
-    <div class="img-container">
-        <img class="img-responsive" src="{{ game.picture.url }}" alt="{{ game }}-picture">
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li class="active">{{ game }}</li>
+    </ol>
+    <div class="game-page-banner col-md-12"><img src="{{ game.picture.url }}" class="img-responsive"/></div>
+    <div class=game-info>
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <td>Nom</td>
+                <td>{{ game }}</td>
+            </tr>
+            <tr>
+                <td>Date de sortie</td>
+                <td>{{ game.release_date }}</td>
+            </tr>
+            <tr>
+                <td>Types</td>
+                <td>
+                    <ul>
+                        {% for type in game.types.all %}
+                            <li><a href="/?type={{ type.slug }}">{{ type.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="comment-section">
-
         <div class="existing-comments">
             <h3>Commentaires</h3>
             {% for comment in comments %}
-                <div class="comment">
-                    <h4>{{ comment.title }}</h4>
+                <div class="comment panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">Ecrit par {{ comment.author }}</span>
+                        <span> -- {{ comment.date | date }}</span>
+                    </div>
+                    <div class="panel-body">
                     <p>{{ comment.body }}</p>
-                    <span>Ecrit par {{ comment.author }}</span>
+
+                    </div>
                 </div>
             {% endfor %}
         </div>
         {% if user.is_authenticated %}
             <form method="post" action="{% url 'games_review:game' game.slug %}">
+                {% csrf_token %}
                 <div class="new-comment form-group">
                     <label>Nouveau commentaire</label>
                     {{ form.body }}
                 </div>
                 <div class="form-group col-md-2">
-                    <button class="btn-success form-control">Poster</button>
+                    <button class="btn-success form-control" type="submit">Poster</button>
                 </div>
             </form>
+        {% else %}
+            <p>Pour écrir un commentaire, veuillez vous <a href="/login">connecter</a></p>
         {% endif %}
     </div>
 

@@ -1,38 +1,51 @@
 {% extends "_base.html" %}
 {% block title %}{{ INDEX_PAGE_TITLE }}{% endblock %}
+{% block page_title %}{{ INDEX_PAGE_TITLE }}{% endblock %}
 {% block body %}
     <div class="list-desc">
         <p>Voici la liste de mes jeux tu peux cliquer dessus pour voir la revue</p>
+        <form method="get" action=".">
+            <input class="search-input" type="text" name="search_games" placeholder="La tu peux chercher des jeux c'est cool ..."/>
+            <button type="submit">Rechercher</button>
+        </form>
     </div>
-
-    <form method="get" action=".">
-        <input class="search-input" type="text" name="search_games" placeholder="La tu peux chercher des jeux c'est cool ..."/>
-        <button type="submit">Rechercher</button>
-    </form>
-
-    <ul class="games-list">
-        {% for game in games %}
-            <li class="game-item">
-                <a href="{% url 'games_review:game' game.slug %}">
-                    <span class="game-label">{{ game.name }}</span>
-                    <span class="game-list-img-container"><img src="{{ game.picture.url }}" class="game-list-img"/></span>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <ul class="col-md-12">
+            {% for game in games %}
+                <li class="game-item col-md-3">
+                    <div class="row">
+                        <a href="{% url 'games_review:game' game.slug %}">
+                            <div class="game-label col-md-12">{{ game.name }}</div>
+                            <div class="col-md-12 img-container" style="display: none"><img src="{{ game.picture.url }}" class="img-responsive"/></div>
+                        </a>
+                    </div>
+                </li>
+            {% empty %}
+                <p>Aucun jeu ne correspond à votre recherche</p>
+            {% endfor %}
+        </ul>
+    </div>
     <div class="pagination">
-        <span class="step-links">
-            {% if games.has_previous %}
-                <a href="?page={{ games.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ games.number }} of {{ games.paginator.num_pages }}
-            </span>
-
-            {% if games.has_next %}
-                <a href="?page={{ games.next_page_number }}">next</a>
-            {% endif %}
-        </span>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li>
+              {% if games.has_previous %}
+                    <a href="?page={{ games.paginator.page_range.0 }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                {% endif %}
+            </li>
+            {% for page in games.paginator.page_range %}
+                <li {% if page == games.number %} class="active" {% endif %}><a href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+            <li>
+                {% if games.has_next %}
+                    <a href="?page={{ games.paginator.num_pages }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                {% endif %}
+            </li>
+          </ul>
+        </nav>
     </div>
 {% endblock %}
