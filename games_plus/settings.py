@@ -123,3 +123,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'games_review/static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/login' #For next release

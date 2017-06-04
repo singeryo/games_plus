@@ -22,7 +22,9 @@
         <div class="subpage-header">
             <h2>{% block page_title %} {% endblock %}</h2>
             {% if user.is_authenticated %}
-                <p>Bienvenue, {{ user.username }}. Tu peux commenter des jeux !</p>
+                <p>Bienvenue, {{ user.username }}. Tu peux commenter des jeux !
+                    Ce n'est pas vous ? <a href="{% url 'games_review:logout' %}?next=/login">Se déconnecter</a>
+                </p>
             {% else %}
                 <p>Salutations, nouveau voyageur. Si tu veux pouvoir commenter des jeux, <a href="/login">connecte toi</a></p>
             {% endif %}
@@ -31,7 +33,7 @@
         </div>
         <footer>
             <div class="social-links">
-                <a href="#"><i class="fa fa-github footer-icon"></i></a>
+                <a href="https://github.com/singeryo/games_plus" target="_blank"><i class="fa fa-github footer-icon"></i></a>
                 <a href="#"><i class="fa fa-facebook-official footer-icon"></i></a>
                 <a href="#"><i class="fa fa-twitter-square footer-icon"></i></a>
             </div>

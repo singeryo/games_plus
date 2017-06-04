@@ -36,7 +36,6 @@ class Game(models.Model):
 
 
 class Comment(models.Model):
-    title = models.CharField(max_length=150)
     author = models.ForeignKey(User, related_name="comments")
     body = models.TextField(max_length=300)
     game = models.ForeignKey(Game, related_name="comments")

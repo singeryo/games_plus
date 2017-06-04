@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from games_review.models import *
 from django.core.paginator import *
 from forms import CommentForm
 
 
-# Create your views here.
+# root page of the web site. Establishes a paginated list of games and displays their links. Search field to filter
+# by name
 def index(request):
     # Check if requests have been made
     if request.GET.get('search_games'):
@@ -28,6 +29,8 @@ def index(request):
     return render(request, 'index.html', {'games': games, 'INDEX_PAGE_TITLE': 'Liste des jeux'})
 
 
+# Game description in wich you can post comments if authenticated. Game types are links back to index with type
+# filter parameter
 def game(request, slug):
     game = get_object_or_404(Game, slug=slug)
 
@@ -43,4 +46,9 @@ def game(request, slug):
 
     comments = game.comments.all()
     return render(request, 'game.html', {'game': game, 'comments': comments, 'form': form})
+
+
+def logout(request):
+    logout(request)
+    return redirect('/login', permanent=True)
 
