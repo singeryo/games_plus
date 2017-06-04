@@ -11,6 +11,7 @@ games_plus is a Django project containing a games review web site (games_review)
 ### What technologies are used
 #### Back-end:
 - Python using Django 1.11
+- SQLite 3 database
 
 #### Front-end:
 - Bootstrap 3
